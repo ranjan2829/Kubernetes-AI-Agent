@@ -1,4 +1,4 @@
-===== Latest Application Logs @ 2025-02-13 23:51:56 =====
+===== Latest Application Logs @ 2025-02-14 01:31:44 =====
 
 ✅ Deployments found:
 📦 Deployment: myapp
@@ -9,18 +9,18 @@
 	from /usr/bin/fluentd:23:in `<main>'
 
 📜 Latest Log for Pod myapp-575fc5bbdb-66l5f:
-INFO:     10.244.0.1:39696 - "GET / HTTP/1.1" 200 OK
+INFO:     10.244.0.1:54498 - "GET / HTTP/1.1" 200 OK
 
 📜 Latest Log for Pod myapp-575fc5bbdb-6tjmn:
-INFO:     10.244.0.1:36292 - "GET / HTTP/1.1" 200 OK
+INFO:     10.244.0.1:34620 - "GET / HTTP/1.1" 200 OK
 
 📜 Latest Log for Pod myapp-575fc5bbdb-xspws:
-INFO:     10.244.0.1:57936 - "GET / HTTP/1.1" 200 OK
+INFO:     10.244.0.1:53124 - "GET / HTTP/1.1" 200 OK
 
 📜 Latest Log for Pod myapp-f6f5889c4-4grmz:
 ⚠️ Could not fetch logs: (400)
 Reason: Bad Request
-HTTP response headers: HTTPHeaderDict({'Audit-Id': '85b6b3d5-8963-4e00-9417-c7bda5df8f10', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'Date': 'Thu, 13 Feb 2025 18:21:57 GMT', 'Content-Length': '231'})
+HTTP response headers: HTTPHeaderDict({'Audit-Id': '81497c2f-d23c-4b05-b25a-d064a1d35f26', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'Date': 'Thu, 13 Feb 2025 20:01:44 GMT', 'Content-Length': '231'})
 HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"container \"myapp-container\" in pod \"myapp-f6f5889c4-4grmz\" is waiting to start: trying and failing to pull image","reason":"BadRequest","code":400}
 
 
