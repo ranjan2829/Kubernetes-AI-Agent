@@ -1,24 +1,24 @@
-===== Latest System Logs @ 2025-02-13 19:30:05 =====
+===== Latest System Logs @ 2025-02-13 23:51:56 =====
 
 ⚙️ Latest System Logs (Namespace: kube-system):
 
 ⚙️ Latest Log for System Pod coredns-668d6bf9bc-pj2v7:
-[WARNING] plugin/health: Local health request to "http://:8080/health" took more than 1s: 1.195372501s
+[WARNING] plugin/health: Local health request to "http://:8080/health" took more than 1s: 2.084679376s
 
 ⚙️ Latest Log for System Pod etcd-minikube:
-{"level":"info","ts":"2025-02-13T13:59:35.304925Z","caller":"mvcc/hash.go:151","msg":"storing new hash","hash":3436190687,"revision":7202,"compact-revision":6952}
+{"level":"info","ts":"2025-02-13T18:21:17.590745Z","caller":"mvcc/hash.go:151","msg":"storing new hash","hash":1482120764,"revision":10059,"compact-revision":9793}
 
 ⚙️ Latest Log for System Pod kube-apiserver-minikube:
-I0213 13:34:31.462575       1 controller.go:615] quota admission added evaluator for: horizontalpodautoscalers.autoscaling
+E0213 18:13:52.692507       1 authentication.go:74] "Unable to authenticate the request" err="[invalid bearer token, service account token has expired]"
 
 ⚙️ Latest Log for System Pod kube-controller-manager-minikube:
-E0213 14:00:04.212680       1 horizontal.go:275] "Unhandled Error" err="failed to compute desired number of replicas based on listed metrics for Deployment/default/myapp: invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server could not find the requested resource (get pods.metrics.k8s.io)" logger="UnhandledError"
+E0213 18:21:55.994251       1 horizontal.go:275] "Unhandled Error" err="failed to compute desired number of replicas based on listed metrics for Deployment/default/myapp: invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server could not find the requested resource (get pods.metrics.k8s.io)" logger="UnhandledError"
 
 ⚙️ Latest Log for System Pod kube-proxy-97tgv:
-I0213 09:59:06.184629       1 shared_informer.go:320] Caches are synced for node config
+I0213 14:02:46.094861       1 shared_informer.go:320] Caches are synced for node config
 
 ⚙️ Latest Log for System Pod kube-scheduler-minikube:
-I0213 09:59:00.872254       1 shared_informer.go:320] Caches are synced for client-ca::kube-system::extension-apiserver-authentication::client-ca-file
+I0213 14:02:43.579070       1 shared_informer.go:320] Caches are synced for client-ca::kube-system::extension-apiserver-authentication::client-ca-file
 
 ⚙️ Latest Log for System Pod storage-provisioner:
-I0213 09:59:36.539955       1 controller.go:884] Started provisioner controller k8s.io/minikube-hostpath_minikube_19e56446-4099-46c6-b454-3a6fa34c9eef!
+I0213 14:03:47.024670       1 controller.go:884] Started provisioner controller k8s.io/minikube-hostpath_minikube_12d2801b-e090-425b-9a31-b9ce300e1386!
