@@ -1,4 +1,5 @@
 import time
+import re
 from datetime import datetime
 from kubernetes import client, config
 
@@ -12,45 +13,59 @@ except:
 v1 = client.CoreV1Api()
 apps_v1 = client.AppsV1Api()
 
-LOG_FILE = "kube_logs.txt"
+APP_LOG_FILE = "app_logs.txt"
+SYSTEM_LOG_FILE = "system_logs.txt"
 
-# Function to fetch and store logs
+# Function to get only the most recent log line
+def get_latest_log(log_text):
+    lines = log_text.strip().split("\n")
+    return lines[-1] if lines else "⚠️ No logs available"
+
+# Function to fetch and store only the most recent log per pod
 def fetch_and_store_logs():
-    with open(LOG_FILE, "w") as f:  # Overwrites the old logs each run
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        f.write(f"===== Kubernetes Logs @ {timestamp} =====\n\n")
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # Store application logs (overwrite with latest logs)
+    with open(APP_LOG_FILE, "w") as app_log:
+        app_log.write(f"===== Latest Application Logs @ {timestamp} =====\n\n")
 
         # Fetch Deployments
-        f.write("✅ Deployments found:\n")
+        app_log.write("✅ Deployments found:\n")
         deployments = apps_v1.list_namespaced_deployment(namespace="default")
         for deploy in deployments.items:
-            f.write(f"📦 Deployment: {deploy.metadata.name}\n")
+            app_log.write(f"📦 Deployment: {deploy.metadata.name}\n")
 
-        # Fetch Application Logs from "default" namespace
-        f.write("\n📜 Application Logs (Namespace: default):\n")
+        # Fetch latest log for each application pod
+        app_log.write("\n📜 Latest Application Logs (Namespace: default):\n")
         pods = v1.list_namespaced_pod(namespace="default")
         for pod in pods.items:
-            f.write(f"\n📜 Logs for Pod {pod.metadata.name}:\n")
+            app_log.write(f"\n📜 Latest Log for Pod {pod.metadata.name}:\n")
             try:
                 log_output = v1.read_namespaced_pod_log(name=pod.metadata.name, namespace="default")
-                f.write(log_output + "\n")
+                latest_log = get_latest_log(log_output)  # Keep only the latest line
+                app_log.write(latest_log + "\n")
             except Exception as e:
-                f.write(f"⚠️ Could not fetch logs: {e}\n")
+                app_log.write(f"⚠️ Could not fetch logs: {e}\n")
 
-        # Fetch System Logs from "kube-system" namespace
-        f.write("\n⚙️ System Logs (Namespace: kube-system):\n")
+    # Store system logs separately (overwrite with latest logs)
+    with open(SYSTEM_LOG_FILE, "w") as sys_log:
+        sys_log.write(f"===== Latest System Logs @ {timestamp} =====\n\n")
+
+        # Fetch latest log for each system pod
+        sys_log.write("⚙️ Latest System Logs (Namespace: kube-system):\n")
         sys_pods = v1.list_namespaced_pod(namespace="kube-system")
         for pod in sys_pods.items:
-            f.write(f"\n⚙️ Logs for System Pod {pod.metadata.name}:\n")
+            sys_log.write(f"\n⚙️ Latest Log for System Pod {pod.metadata.name}:\n")
             try:
                 log_output = v1.read_namespaced_pod_log(name=pod.metadata.name, namespace="kube-system")
-                f.write(log_output + "\n")
+                latest_log = get_latest_log(log_output)  # Keep only the latest line
+                sys_log.write(latest_log + "\n")
             except Exception as e:
-                f.write(f"⚠️ Could not fetch logs: {e}\n")
+                sys_log.write(f"⚠️ Could not fetch logs: {e}\n")
 
 if __name__ == "__main__":
     print("Starting continuous Kubernetes log collection... Press Ctrl+C to stop.")
     while True:
         fetch_and_store_logs()
         print("✅ Logs updated. Sleeping for 10 seconds...")
-        time.sleep(10)  # Fetch logs every 60 seconds
+        time.sleep(10)  # Fetch logs every 10 seconds

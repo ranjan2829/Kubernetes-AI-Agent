@@ -1,0 +1,26 @@
+===== Latest Application Logs @ 2025-02-13 19:30:05 =====
+
+✅ Deployments found:
+📦 Deployment: myapp
+
+📜 Latest Application Logs (Namespace: default):
+
+📜 Latest Log for Pod fluentd-b9tzh:
+	from /usr/bin/fluentd:23:in `<main>'
+
+📜 Latest Log for Pod myapp-575fc5bbdb-66l5f:
+INFO:     10.244.0.1:32986 - "GET / HTTP/1.1" 200 OK
+
+📜 Latest Log for Pod myapp-575fc5bbdb-6tjmn:
+INFO:     10.244.0.1:41590 - "GET / HTTP/1.1" 200 OK
+
+📜 Latest Log for Pod myapp-575fc5bbdb-xspws:
+INFO:     10.244.0.1:44748 - "GET / HTTP/1.1" 200 OK
+
+📜 Latest Log for Pod myapp-f6f5889c4-4grmz:
+⚠️ Could not fetch logs: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Audit-Id': '0961c6a1-effa-493d-9ad9-3f26568039f3', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'Date': 'Thu, 13 Feb 2025 14:00:05 GMT', 'Content-Length': '231'})
+HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"container \"myapp-container\" in pod \"myapp-f6f5889c4-4grmz\" is waiting to start: trying and failing to pull image","reason":"BadRequest","code":400}
+
+
